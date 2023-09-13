@@ -34,3 +34,41 @@ cmake -Bbuild -H. -DBUILD_TESTING=OFF
 ```bash
 sudo cmake --build build/ --target install
 ```
+
+## How to use CMake
+
+- Create build directory
+
+```bash
+mkdir build
+```
+
+- Change directory to build
+
+```bash
+cd build/
+```
+
+- Generate build files
+
+```bash
+cmake ..
+```
+
+- Build the library
+
+```bash
+make
+```
+
+- Execute tests
+
+```bash
+make test
+```
+
+- Run test executable
+
+```bash
+./tests
+```
