@@ -56,4 +56,32 @@ TEST_CASE("B-Tree Test")
                 "  41 47 \n"
                 "  56 60 63 \n");
     }
+
+    SECTION("Search before delete from B-Tree")
+    {
+        REQUIRE(tree.search(30) != nullptr);
+    }
+
+    tree.remove(30);
+
+    SECTION("Search after delete from B-Tree")
+    {
+        REQUIRE(tree.search(30) == nullptr);
+    }
+
+    SECTION("Print B-Tree")
+    {
+        ostringstream capture;
+        streambuf *original = cout.rdbuf(capture.rdbuf());
+        tree.print();
+        cout.rdbuf(original);
+
+        REQUIRE(capture.str() ==
+                "17 23 40 55 \n"
+                "  9 15 \n"
+                "  21 22 \n"
+                "  25 27 32 39 \n"
+                "  41 47 \n"
+                "  56 60 63 \n");
+    }
 }
