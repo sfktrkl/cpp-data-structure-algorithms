@@ -33,4 +33,28 @@ namespace AbstractDataTypes
             throw std::out_of_range("Index out of bounds");
         return items[index];
     }
+
+    template <typename T>
+    inline void List<T>::insert(int index, T value)
+    {
+        if (index < 0 || index > count)
+            throw std::out_of_range("Index out of bounds");
+
+        ++count;
+        auto newItems = new T[count];
+
+        for (int i = 0, j = 0; i < count; ++i)
+        {
+            if (index == i)
+                newItems[i] = value;
+            else
+            {
+                newItems[i] = items[j];
+                ++j;
+            }
+        }
+
+        delete[] items;
+        items = newItems;
+    }
 }
