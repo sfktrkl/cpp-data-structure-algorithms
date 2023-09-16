@@ -50,4 +50,16 @@ TEST_CASE("List ADT Test")
         REQUIRE(list.search(71) == 2);
         REQUIRE_THROWS(list.search(44));
     }
+
+    list.remove(2);
+
+    SECTION("Check item in List")
+    {
+        REQUIRE(list.get(2) == 25);
+    }
+
+    SECTION("Search item in List")
+    {
+        REQUIRE_THROWS(list.search(71));
+    }
 }

@@ -68,4 +68,24 @@ namespace AbstractDataTypes
         }
         throw std::runtime_error("Value not found");
     }
+
+    template <typename T>
+    inline void List<T>::remove(int index)
+    {
+        if (index < 0 || index > count)
+            throw std::out_of_range("Index out of bounds");
+
+        --count;
+        auto newItems = new T[count];
+
+        for (int i = 0, j = 0; i < count; ++i, ++j)
+        {
+            if (index == j)
+                ++j;
+            newItems[i] = items[j];
+        }
+
+        delete[] items;
+        items = newItems;
+    }
 }
