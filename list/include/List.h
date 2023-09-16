@@ -1,4 +1,5 @@
 #pragma once
+#include <stdexcept>
 
 namespace AbstractDataTypes
 {
@@ -24,4 +25,12 @@ namespace AbstractDataTypes
         int count;
         T *items;
     };
+
+    template <typename T>
+    inline T List<T>::get(int index)
+    {
+        if (index < 0 || index > count)
+            throw std::out_of_range("Index out of bounds");
+        return items[index];
+    }
 }
