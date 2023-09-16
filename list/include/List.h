@@ -57,4 +57,15 @@ namespace AbstractDataTypes
         delete[] items;
         items = newItems;
     }
+
+    template <typename T>
+    inline int List<T>::search(int value)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            if (value == items[i])
+                return i;
+        }
+        throw std::runtime_error("Value not found");
+    }
 }
