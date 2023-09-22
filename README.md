@@ -72,3 +72,11 @@ make test
 ```bash
 ./tests
 ```
+
+## How to test all projects
+
+`testall.py` script can be used to test all projects under the current directory that has a build folder. It can be used to run `make` and `ctest` commands for all those folders and it can report the status of the build and the tests.
+
+```bash
+./testall
+```

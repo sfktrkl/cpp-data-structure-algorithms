@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Get the directory of the current script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Change to the script's directory
+cd "$DIR"
+
+# Run the Python script
+python3 testall.py
