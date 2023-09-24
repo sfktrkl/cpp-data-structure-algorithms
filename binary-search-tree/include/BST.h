@@ -86,6 +86,12 @@ namespace DataStructures
             return successor(node);
         }
 
+        std::optional<T> predecessor(T key)
+        {
+            BSTNode<T> *node = search(root, key);
+            return predecessor(node);
+        }
+
     protected:
         BSTNode<T> *insert(BSTNode<T> *node, T key)
         {
@@ -201,6 +207,24 @@ namespace DataStructures
                 BSTNode<T> *parent = node->parent;
                 BSTNode<T> *current = node;
                 while (parent && current == parent->right)
+                {
+                    current = parent;
+                    parent = current->parent;
+                }
+
+                return parent ? std::make_optional(parent->key) : std::nullopt;
+            }
+        }
+
+        std::optional<T> predecessor(BSTNode<T> *node)
+        {
+            if (node->left)
+                return max(node->left);
+            else
+            {
+                BSTNode<T> *parent = node->parent;
+                BSTNode<T> *current = node;
+                while (parent && current == parent->left)
                 {
                     current = parent;
                     parent = current->parent;

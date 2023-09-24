@@ -49,4 +49,8 @@ TEST_CASE("Binary Search Tree Test")
     REQUIRE(bst.successor(31) == 53);
     REQUIRE(bst.successor(15) == 23);
     REQUIRE(bst.successor(88) == std::nullopt);
+
+    REQUIRE(bst.predecessor(12) == 7);
+    REQUIRE(bst.predecessor(29) == 23);
+    REQUIRE(bst.predecessor(3) == std::nullopt);
 }
