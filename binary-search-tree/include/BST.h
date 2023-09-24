@@ -13,6 +13,7 @@ namespace DataStructures
         T key;
         BSTNode<T> *left;
         BSTNode<T> *right;
+        BSTNode<T> *parent;
     };
 
     template <typename T>
@@ -79,6 +80,12 @@ namespace DataStructures
             return max(root);
         }
 
+        std::optional<T> successor(T key)
+        {
+            BSTNode<T> *node = search(root, key);
+            return successor(node);
+        }
+
     protected:
         BSTNode<T> *insert(BSTNode<T> *node, T key)
         {
@@ -88,11 +95,18 @@ namespace DataStructures
                 node->key = key;
                 node->left = nullptr;
                 node->right = nullptr;
+                node->parent = nullptr;
             }
             else if (key < node->key)
+            {
                 node->left = insert(node->left, key);
+                node->left->parent = node;
+            }
             else
+            {
                 node->right = insert(node->right, key);
+                node->right->parent = node;
+            }
             return node;
         }
 
@@ -135,7 +149,7 @@ namespace DataStructures
             q.push(node);
             while (!q.empty())
             {
-                auto n = q.front();
+                BSTNode<T> *n = q.front();
                 std::cout << n->key << " ";
                 q.pop();
 
@@ -176,6 +190,24 @@ namespace DataStructures
                 return node->key;
             else
                 return max(node->right);
+        }
+
+        std::optional<T> successor(BSTNode<T> *node)
+        {
+            if (node->right)
+                return min(node->right);
+            else
+            {
+                BSTNode<T> *parent = node->parent;
+                BSTNode<T> *current = node;
+                while (parent && current == parent->right)
+                {
+                    current = parent;
+                    parent = current->parent;
+                }
+
+                return parent ? std::make_optional(parent->key) : std::nullopt;
+            }
         }
 
     private:
