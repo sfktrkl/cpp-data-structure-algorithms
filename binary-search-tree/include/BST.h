@@ -32,6 +32,28 @@ namespace DataStructures
             destroyTree(root);
         }
 
+        void insert(T key)
+        {
+            root = insert(root, key);
+        }
+
+    protected:
+        BSTNode<T> *insert(BSTNode<T> *node, T key)
+        {
+            if (node == nullptr)
+            {
+                node = new BSTNode<T>;
+                node->key = key;
+                node->left = nullptr;
+                node->right = nullptr;
+            }
+            else if (node->key < key)
+                node->right = insert(node->right, key);
+            else
+                node->left = insert(node->left, key);
+            return node;
+        }
+
     private:
         BSTNode<T> *root;
     };
