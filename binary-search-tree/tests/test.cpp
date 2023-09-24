@@ -39,4 +39,7 @@ TEST_CASE("Binary Search Tree Test")
     auto levelorder = capture([&]()
                               { bst.levelorder(); });
     REQUIRE(levelorder == "23 12 31 3 15 29 88 7 53 \n");
+
+    REQUIRE(bst.search(31) == true);
+    REQUIRE(bst.search(18) == false);
 }

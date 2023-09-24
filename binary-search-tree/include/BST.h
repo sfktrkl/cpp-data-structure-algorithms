@@ -63,6 +63,11 @@ namespace DataStructures
             std::cout << std::endl;
         }
 
+        bool search(T key)
+        {
+            return search(root, key);
+        }
+
     protected:
         BSTNode<T> *insert(BSTNode<T> *node, T key)
         {
@@ -128,6 +133,18 @@ namespace DataStructures
                 if (n->right)
                     q.push(n->right);
             }
+        }
+
+        BSTNode<T> *search(BSTNode<T> *node, T key)
+        {
+            if (!node)
+                return nullptr;
+            else if (key == node->key)
+                return node;
+            else if (key < node->key)
+                return search(node->left, key);
+            else
+                return search(node->right, key);
         }
 
     private:
