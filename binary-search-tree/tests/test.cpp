@@ -42,4 +42,7 @@ TEST_CASE("Binary Search Tree Test")
 
     REQUIRE(bst.search(31) == true);
     REQUIRE(bst.search(18) == false);
+
+    REQUIRE(bst.min() == 3);
+    REQUIRE(bst.max() == 88);
 }

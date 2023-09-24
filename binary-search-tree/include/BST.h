@@ -1,6 +1,7 @@
 #pragma once
 #include <functional>
 #include <iostream>
+#include <optional>
 #include <queue>
 
 namespace DataStructures
@@ -66,6 +67,16 @@ namespace DataStructures
         bool search(T key)
         {
             return search(root, key);
+        }
+
+        std::optional<T> min()
+        {
+            return min(root);
+        }
+
+        std::optional<T> max()
+        {
+            return max(root);
         }
 
     protected:
@@ -145,6 +156,26 @@ namespace DataStructures
                 return search(node->left, key);
             else
                 return search(node->right, key);
+        }
+
+        std::optional<T> min(BSTNode<T> *node)
+        {
+            if (!node)
+                return std::nullopt;
+            else if (!node->left)
+                return node->key;
+            else
+                return min(node->left);
+        }
+
+        std::optional<T> max(BSTNode<T> *node)
+        {
+            if (!node)
+                return std::nullopt;
+            else if (!node->right)
+                return node->key;
+            else
+                return max(node->right);
         }
 
     private:
