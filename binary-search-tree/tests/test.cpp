@@ -35,4 +35,8 @@ TEST_CASE("Binary Search Tree Test")
     auto postorder = capture([&]()
                              { bst.postorder(); });
     REQUIRE(postorder == "7 3 15 12 29 53 88 31 23 \n");
+
+    auto levelorder = capture([&]()
+                              { bst.levelorder(); });
+    REQUIRE(levelorder == "23 12 31 3 15 29 88 7 53 \n");
 }

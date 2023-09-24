@@ -1,6 +1,7 @@
 #pragma once
 #include <functional>
 #include <iostream>
+#include <queue>
 
 namespace DataStructures
 {
@@ -56,6 +57,12 @@ namespace DataStructures
             std::cout << std::endl;
         }
 
+        void levelorder()
+        {
+            levelorder(root);
+            std::cout << std::endl;
+        }
+
     protected:
         BSTNode<T> *insert(BSTNode<T> *node, T key)
         {
@@ -101,6 +108,26 @@ namespace DataStructures
             postorder(node->left);
             postorder(node->right);
             std::cout << node->key << " ";
+        }
+
+        void levelorder(BSTNode<T> *node)
+        {
+            if (!node)
+                return;
+
+            std::queue<BSTNode<T> *> q;
+            q.push(node);
+            while (!q.empty())
+            {
+                auto n = q.front();
+                std::cout << n->key << " ";
+                q.pop();
+
+                if (n->left)
+                    q.push(n->left);
+                if (n->right)
+                    q.push(n->right);
+            }
         }
 
     private:
