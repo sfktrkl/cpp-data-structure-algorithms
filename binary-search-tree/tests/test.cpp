@@ -53,4 +53,41 @@ TEST_CASE("Binary Search Tree Test")
     REQUIRE(bst.predecessor(12) == 7);
     REQUIRE(bst.predecessor(29) == 23);
     REQUIRE(bst.predecessor(3) == std::nullopt);
+
+    bst.remove(15);
+    bst.remove(53);
+
+    preorder = capture([&]()
+                       { bst.preorder(); });
+    REQUIRE(preorder == "23 12 3 7 31 29 88 \n");
+
+    inorder = capture([&]()
+                      { bst.inorder(); });
+    REQUIRE(inorder == "3 7 12 23 29 31 88 \n");
+
+    postorder = capture([&]()
+                        { bst.postorder(); });
+    REQUIRE(postorder == "7 3 12 29 88 31 23 \n");
+
+    levelorder = capture([&]()
+                         { bst.levelorder(); });
+    REQUIRE(levelorder == "23 12 31 3 29 88 7 \n");
+
+    bst.remove(31);
+
+    preorder = capture([&]()
+                       { bst.preorder(); });
+    REQUIRE(preorder == "23 12 3 7 88 29 \n");
+
+    inorder = capture([&]()
+                      { bst.inorder(); });
+    REQUIRE(inorder == "3 7 12 23 29 88 \n");
+
+    postorder = capture([&]()
+                        { bst.postorder(); });
+    REQUIRE(postorder == "7 3 12 29 88 23 \n");
+
+    levelorder = capture([&]()
+                         { bst.levelorder(); });
+    REQUIRE(levelorder == "23 12 88 3 29 7 \n");
 }

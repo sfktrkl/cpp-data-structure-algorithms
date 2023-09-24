@@ -92,6 +92,11 @@ namespace DataStructures
             return predecessor(node);
         }
 
+        void remove(T key)
+        {
+            root = remove(root, key);
+        }
+
     protected:
         BSTNode<T> *insert(BSTNode<T> *node, T key)
         {
@@ -232,6 +237,46 @@ namespace DataStructures
 
                 return parent ? std::make_optional(parent->key) : std::nullopt;
             }
+        }
+
+        BSTNode<T> *remove(BSTNode<T> *node, T key)
+        {
+            if (!node)
+                return nullptr;
+
+            if (key == node->key)
+            {
+                if (!node->left && !node->right)
+                {
+                    delete node;
+                    node = nullptr;
+                }
+                else if (!node->left && node->right)
+                {
+                    auto temp = node;
+                    node->right->parent = node->parent;
+                    node = node->right;
+                    delete temp;
+                }
+                else if (node->left && !node->right)
+                {
+                    auto temp = node;
+                    node->left->parent = node->parent;
+                    node = node->left;
+                    delete temp;
+                }
+                else
+                {
+                    node->key = successor(key).value();
+                    node->right = remove(node->right, node->key);
+                }
+            }
+            else if (key < node->key)
+                node->left = remove(node->left, key);
+            else
+                node->right = remove(node->right, key);
+
+            return node;
         }
 
     private:
